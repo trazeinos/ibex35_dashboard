@@ -41,18 +41,19 @@ st.title("Dashboard IBEX35 Profesional - AgGrid")
 # ==============================
 gb = GridOptionsBuilder.from_dataframe(tabla_final)
 
-# Hacer que la primera columna (Ticker) quede congelada
-gb.configure_column("Ticker", pinned="left", header_name="Ticker", width=100)
+# Congelar primera columna
+gb.configure_column("Ticker", pinned="left", width=100)
 
-# Configuración general: ordenar, filtrar, scroll
+# Configuración general
 gb.configure_default_column(
     editable=False,
     filter=True,
     sortable=True,
     resizable=True,
+    minWidth=80
 )
 
-# Formato condicional para columnas de %
+# Formato condicional %
 cellsytle_jscode = JsCode("""
 function(params) {
     if (params.value == null) {return {}}
@@ -68,16 +69,13 @@ for col in tabla_final.columns:
 
 grid_options = gb.build()
 
-# ==============================
-# 4. Mostrar tabla profesional
-# ==============================
 AgGrid(
     tabla_final,
     gridOptions=grid_options,
     enable_enterprise_modules=False,
     theme="alpine",
     height=600,
-    fit_columns_on_grid_load=True,
-    allow_unsafe_jscode=True  # <--- Esto es lo clave
+    width='100%',
+    fit_columns_on_grid_load=False,  # <--- desactivado
+    allow_unsafe_jscode=True
 )
-

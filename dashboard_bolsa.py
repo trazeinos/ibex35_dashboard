@@ -24,7 +24,7 @@ tabla_final = pd.DataFrame(index=precios.index)
 
 for fecha in precios.columns:
     #fecha_str = fecha.date().strftime("%Y-%m-%d")
-    fecha_str = fecha.date().strftime("%d-%m-%y")
+    fecha_str = fecha.date().strftime("%d-%m")
     tabla_final[f"{fecha_str} €"] = precios[fecha].round(2)
     tabla_final[f"{fecha_str} %"] = variacion[fecha].round(2)
 

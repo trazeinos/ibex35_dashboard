@@ -66,9 +66,9 @@ function(params) {
 for col in tabla_final.columns:
     if "%" in col:
         gb.configure_column(col, cellStyle=cellsytle_jscode, type=["numericColumn","numberColumnFilter","customNumericFormat"], precision=2)
-    if "Precio" in col or "%" in col:
+    if "€" in col or "%" in col:
         gb.configure_column(col, minWidth=80, width=80, maxWidth=100)
-        
+
 grid_options = gb.build()
 
 AgGrid(
